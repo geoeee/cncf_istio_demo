@@ -1,0 +1,12 @@
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: company-auth
+spec:
+  targets:
+  - name: company
+  origins:
+  - jwt:
+      issuer: 192.168.99.100
+      jwksUri: http://202.182.99.71/jwks
+  principalBinding: USE_ORIGIN

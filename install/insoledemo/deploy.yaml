@@ -1,0 +1,122 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authz
+  labels:
+    app: authz
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http
+  selector:
+    app: authz
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: authz-v2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: authz
+        version: v2
+    spec:
+      containers:
+      - name: authz
+        image: zhangzj/authz_service:v2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: company
+  labels:
+    app: company
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http
+  selector:
+    app: company
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: company-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: company
+        version: v1
+    spec:
+      containers:
+      - name: company
+        image: zhangzj/company_service:v1
+        env:
+          - name: product_service_host
+            value: product.default.svc.cluster.local
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product
+  labels:
+    app: product
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http
+  selector:
+    app: product
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: product-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product
+        version: v1
+    spec:
+      containers:
+      - name: product
+        image: zhangzj/product_service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: product-v2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product
+        version: v2
+    spec:
+      containers:
+      - name: product
+        image: zhangzj/product_service:v2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+---

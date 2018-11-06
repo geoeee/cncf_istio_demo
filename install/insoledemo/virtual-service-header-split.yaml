@@ -1,0 +1,31 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: product
+spec:
+  hosts:
+  - product
+  http:
+  - match:
+    - headers:
+        x-request-platform:
+          exact: android
+    route:
+    - destination:
+        host: product
+        subset: v1
+        port:
+          number: 80
+  - match:
+    - headers:
+        x-request-platform:
+          exact: ios
+    route:
+    - destination:
+        host: product
+        subset: v2
+        port:
+          number: 80
+  - route:
+    - destination:
+        host: product

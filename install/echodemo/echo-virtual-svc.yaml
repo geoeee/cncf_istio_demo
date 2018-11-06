@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: echo
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - echo-gateway
+  http:
+  - match:
+    - uri:
+        exact: /echo
+    route:
+    - destination:
+        host: echo
+        subset: v1
+      weight: 95
+    - destination:
+        host: echo
+        subset: v2
+      weight: 5

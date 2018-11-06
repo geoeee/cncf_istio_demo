@@ -1,0 +1,25 @@
+apiVersion: "config.istio.io/v1alpha2"
+kind: denier
+metadata:
+  name: denycompanyhandler
+spec:
+  status:
+    code: 7
+    message: Not allowed
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: checknothing
+metadata:
+  name: denycompanyrequest
+spec:
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: rule
+metadata:
+  name: denycompany
+spec:
+  match: destination.labels["app"] == "product" && source.labels["app"]=="company"
+  # match: destination.labels["app"] == "product" && source.labels["app"]=="company" && source.labels["version"] == "v3"
+  actions:
+  - handler: denycompanyhandler.denier
+    instances: [ denycompanyrequest.checknothing ]

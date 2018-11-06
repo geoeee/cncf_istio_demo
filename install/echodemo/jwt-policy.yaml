@@ -1,0 +1,13 @@
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: echo-auth
+spec:
+  targets:
+  - name: echo
+  origins:
+  - jwt:
+      issuer: 192.168.99.100
+      jwksUri: http://202.182.99.71/jwks
+  principalBinding: USE_ORIGIN
+
