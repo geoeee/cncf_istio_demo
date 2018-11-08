@@ -3,6 +3,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: company
+  namespace: demo
 spec:
   host: company
   subsets:
@@ -14,6 +15,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: product
+  namespace: demo
 spec:
   host: product
   subsets:

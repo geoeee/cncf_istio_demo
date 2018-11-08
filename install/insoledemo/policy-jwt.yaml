@@ -2,6 +2,7 @@ apiVersion: "authentication.istio.io/v1alpha1"
 kind: "Policy"
 metadata:
   name: company-auth
+  namespace: demo
 spec:
   targets:
   - name: company

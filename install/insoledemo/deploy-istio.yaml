@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: authz
+  namespace: demo
   labels:
     app: authz
 spec:
@@ -18,13 +19,14 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   name: authz-v2
+  namespace: demo
 spec:
   replicas: 1
   strategy: {}
   template:
     metadata:
       annotations:
-        sidecar.istio.io/status: '{"version":"2b608fd304008399957a04bf9c0af22a72b1d4553dc714df5fc51fbd929edc34","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"],"imagePullSecrets":null}'
+        sidecar.istio.io/status: '{"version":"df841a3f2696067f0fec801d67edc767bb55ce8d989bcfd8a0127da3ef35256f","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"],"imagePullSecrets":null}'
       creationTimestamp: null
       labels:
         app: authz
@@ -83,7 +85,7 @@ spec:
               fieldPath: metadata.name
         - name: ISTIO_META_INTERCEPTION_MODE
           value: REDIRECT
-        image: docker.io/zhangzj/proxyv2:v1.0.2-zhangzj-4
+        image: istio/proxyv2:1.0.2
         imagePullPolicy: IfNotPresent
         name: istio-proxy
         resources:
@@ -114,7 +116,7 @@ spec:
         - 8080,
         - -d
         - ""
-        image: docker.io/zhangzj/proxy_init:v1.0.2-zhangzj-4
+        image: istio/proxy_init:1.0.2
         imagePullPolicy: IfNotPresent
         name: istio-init
         resources: {}
@@ -136,6 +138,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: company
+  namespace: demo
   labels:
     app: company
 spec:
@@ -151,13 +154,14 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   name: company-v1
+  namespace: demo
 spec:
   replicas: 1
   strategy: {}
   template:
     metadata:
       annotations:
-        sidecar.istio.io/status: '{"version":"2b608fd304008399957a04bf9c0af22a72b1d4553dc714df5fc51fbd929edc34","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"],"imagePullSecrets":null}'
+        sidecar.istio.io/status: '{"version":"df841a3f2696067f0fec801d67edc767bb55ce8d989bcfd8a0127da3ef35256f","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"],"imagePullSecrets":null}'
       creationTimestamp: null
       labels:
         app: company
@@ -166,7 +170,7 @@ spec:
       containers:
       - env:
         - name: product_service_host
-          value: product.default.svc.cluster.local
+          value: product.demo.svc.cluster.local
         image: zhangzj/company_service:v1
         imagePullPolicy: IfNotPresent
         name: company
@@ -219,7 +223,7 @@ spec:
               fieldPath: metadata.name
         - name: ISTIO_META_INTERCEPTION_MODE
           value: REDIRECT
-        image: docker.io/zhangzj/proxyv2:v1.0.2-zhangzj-4
+        image: istio/proxyv2:1.0.2
         imagePullPolicy: IfNotPresent
         name: istio-proxy
         resources:
@@ -250,7 +254,7 @@ spec:
         - 8080,
         - -d
         - ""
-        image: docker.io/zhangzj/proxy_init:v1.0.2-zhangzj-4
+        image: istio/proxy_init:1.0.2
         imagePullPolicy: IfNotPresent
         name: istio-init
         resources: {}
@@ -272,6 +276,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: product
+  namespace: demo
   labels:
     app: product
 spec:
@@ -287,13 +292,14 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   name: product-v1
+  namespace: demo
 spec:
   replicas: 1
   strategy: {}
   template:
     metadata:
       annotations:
-        sidecar.istio.io/status: '{"version":"2b608fd304008399957a04bf9c0af22a72b1d4553dc714df5fc51fbd929edc34","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"],"imagePullSecrets":null}'
+        sidecar.istio.io/status: '{"version":"df841a3f2696067f0fec801d67edc767bb55ce8d989bcfd8a0127da3ef35256f","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"],"imagePullSecrets":null}'
       creationTimestamp: null
       labels:
         app: product
@@ -352,7 +358,7 @@ spec:
               fieldPath: metadata.name
         - name: ISTIO_META_INTERCEPTION_MODE
           value: REDIRECT
-        image: docker.io/zhangzj/proxyv2:v1.0.2-zhangzj-4
+        image: istio/proxyv2:1.0.2
         imagePullPolicy: IfNotPresent
         name: istio-proxy
         resources:
@@ -383,7 +389,7 @@ spec:
         - 8080,
         - -d
         - ""
-        image: docker.io/zhangzj/proxy_init:v1.0.2-zhangzj-4
+        image: istio/proxy_init:1.0.2
         imagePullPolicy: IfNotPresent
         name: istio-init
         resources: {}
@@ -406,13 +412,14 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   name: product-v2
+  namespace: demo
 spec:
   replicas: 1
   strategy: {}
   template:
     metadata:
       annotations:
-        sidecar.istio.io/status: '{"version":"2b608fd304008399957a04bf9c0af22a72b1d4553dc714df5fc51fbd929edc34","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"],"imagePullSecrets":null}'
+        sidecar.istio.io/status: '{"version":"df841a3f2696067f0fec801d67edc767bb55ce8d989bcfd8a0127da3ef35256f","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"],"imagePullSecrets":null}'
       creationTimestamp: null
       labels:
         app: product
@@ -471,7 +478,7 @@ spec:
               fieldPath: metadata.name
         - name: ISTIO_META_INTERCEPTION_MODE
           value: REDIRECT
-        image: docker.io/zhangzj/proxyv2:v1.0.2-zhangzj-4
+        image: istio/proxyv2:1.0.2
         imagePullPolicy: IfNotPresent
         name: istio-proxy
         resources:
@@ -502,7 +509,7 @@ spec:
         - 8080,
         - -d
         - ""
-        image: docker.io/zhangzj/proxy_init:v1.0.2-zhangzj-4
+        image: istio/proxy_init:1.0.2
         imagePullPolicy: IfNotPresent
         name: istio-init
         resources: {}

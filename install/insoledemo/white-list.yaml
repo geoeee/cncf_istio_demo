@@ -3,6 +3,7 @@ apiVersion: config.istio.io/v1alpha2
 kind: listchecker
 metadata:
   name: whitelist
+  namespace: demo
 spec:
   # providerUrl: ordinarily black and white lists are maintained
   # externally and fetched asynchronously using the providerUrl.
@@ -13,6 +14,7 @@ apiVersion: config.istio.io/v1alpha2
 kind: listentry
 metadata:
   name: appname
+  namespace: demo
 spec:
   value: source.labels["app"]
 ---
@@ -20,6 +22,7 @@ apiVersion: config.istio.io/v1alpha2
 kind: rule
 metadata:
   name: checkname
+  namespace: demo
 spec:
   match: destination.labels["app"] == "product"
   actions:

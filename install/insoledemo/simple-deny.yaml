@@ -2,6 +2,7 @@ apiVersion: "config.istio.io/v1alpha2"
 kind: denier
 metadata:
   name: denycompanyhandler
+  namespace: demo
 spec:
   status:
     code: 7
@@ -11,12 +12,14 @@ apiVersion: "config.istio.io/v1alpha2"
 kind: checknothing
 metadata:
   name: denycompanyrequest
+  namespace: demo
 spec:
 ---
 apiVersion: "config.istio.io/v1alpha2"
 kind: rule
 metadata:
   name: denycompany
+  namespace: demo
 spec:
   match: destination.labels["app"] == "product" && source.labels["app"]=="company"
   # match: destination.labels["app"] == "product" && source.labels["app"]=="company" && source.labels["version"] == "v3"

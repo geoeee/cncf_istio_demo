@@ -7,6 +7,7 @@ inspect:
 
 insole/apply:
 	@echo "applying insole demo"
+	kubectl apply -f namespace-demo.yaml
 	istioctl kube-inject -f deploy.yaml > deploy-istio.yaml
 	kubectl apply -f deploy-istio.yaml
 	kubectl apply -f gateway.yaml
@@ -19,6 +20,7 @@ insole/clean:
 	kubectl delete -f gateway.yaml
 	kubectl delete -f virtual-services.yaml
 	kubectl delete -f destination-rules.yaml
+	kubectl delete -f namespace-demo.yaml
 
 weight_split/apply:
 	@echo "==== apply weight split for product service"
