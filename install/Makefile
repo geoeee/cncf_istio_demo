@@ -36,4 +36,4 @@ kube_status:
 	minikube status
 
 kube_start:
-	minikube start --logtostderr --v 0 --memory=4096 --bootstrapper=localkube
+	minikube start --logtostderr --v 0 --memory=6144 --bootstrapper=localkube
