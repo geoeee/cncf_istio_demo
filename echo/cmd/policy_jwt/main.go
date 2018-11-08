@@ -27,10 +27,10 @@ func getCompanies(auth string) {
 
 	req.Header.Add("Cache-Control", "no-cache")
 
-	if auth == "right" {
+	if auth == "RS256" {
 		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", okToken))
 	}
-	if auth == "wrong" {
+	if auth == "HS256" {
 		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", wrongToken))
 	}
 
@@ -42,34 +42,12 @@ func getCompanies(auth string) {
 	}
 	fmt.Printf("[%s] resp status code:[%s]\n", time.Now(), res.Status)
 	defer res.Body.Close()
-	// body, err := ioutil.ReadAll(res.Body)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	return
-	// }
-
-
-	
-	// er := &comResponse{}
-	// err = json.Unmarshal(body, er)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	return
-	// }
-	// for _, c := range er.Companies {
-	// 	for _, p := range c.Products {
-	// 		fmt.Printf("{ x-request-platform: [%s] } ==> product version [%s], pod name [%s]\n",xHeader, p.Meta.Version, p.Meta.PodName)
-	// 	}
-	// }
 }
 
 func main() {
 	argNum := len(os.Args)
 	if argNum < 2 {
-		for i := 0; i < 2000; i++ {
-			getCompanies("")
-			time.Sleep(1 * time.Second)
-		}
+		fmt.Println("Usage: required args [RS256 | HS256]")
 		return
 	} 
 
