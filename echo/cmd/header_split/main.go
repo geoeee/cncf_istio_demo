@@ -46,6 +46,12 @@ func getCompanies(xHeader string) {
 	for _, c := range er.Companies {
 		for _, p := range c.Products {
 			fmt.Printf("{ x-request-platform: [%s] } ==> product version [%s], pod name [%s]\n",xHeader, p.Meta.Version, p.Meta.PodName)
+			if p.Meta.Version == "1.0.0" {
+				prodV1Count = prodV1Count + 1
+			}
+			if p.Meta.Version == "2.0.0" {
+				prodV2Count = prodV2Count + 1
+			}	
 		}
 	}
 }
@@ -59,10 +65,12 @@ func main() {
 		for i := 0; i < 10; i++ {
 			getCompanies("")
 		}
+		fmt.Printf("prod of company count v1: %d, v2: %d\n", prodV1Count, prodV2Count)
 		return
 	} 
 
 	for i := 0; i < 10; i++ {
 		getCompanies(os.Args[1])
 	}
+	fmt.Printf("prod of company count v1: %d, v2: %d\n", prodV1Count, prodV2Count)
 }
