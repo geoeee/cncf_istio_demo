@@ -13,20 +13,20 @@
 # clean_insoledemo:
 # 	cd install/insoledemo && make clean
 
-
+PWD = $(shell pwd)
 
 istio/apply:
 	echo "istio apply"
-	kubectl apply -f ${ISTIO_DEMO_INSTALL}/crds.yaml
-	kubectl apply -f ${ISTIO_DEMO_INSTALL}/authz-crds.yaml
-	kubectl apply -f ${ISTIO_DEMO_INSTALL}/istio.yaml
+	kubectl apply -f $(PWD)/crds.yaml
+	kubectl apply -f $(PWD)/authz-crds.yaml
+	kubectl apply -f $(PWD)/istio.yaml
 
 
 istio/clean:
 	echo "istio clean"
-	kubectl delete -f ${ISTIO_DEMO_INSTALL}/istio.yaml
-	kubectl delete -f ${ISTIO_DEMO_INSTALL}/crds.yaml
-	kubectl delete -f ${ISTIO_DEMO_INSTALL}/authz-crds.yaml
+	kubectl delete -f $(PWD)/istio.yaml
+	kubectl delete -f $(PWD)/crds.yaml
+	kubectl delete -f $(PWD)/authz-crds.yaml
 
 istio/check:
 	echo "istio check pods"

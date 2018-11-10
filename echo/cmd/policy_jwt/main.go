@@ -11,14 +11,15 @@ import (
 )
 
 type comResponse struct {
-	Meta     schema.Meta
+	Meta      schema.Meta
 	Companies []*schema.Company `json:"elements"`
 }
+
 var (
 	prodV1Count int
 	prodV2Count int
-	okToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTA4MDE0MTUsImlzcyI6IjE5Mi4xNjguOTkuMTAwIn0.naXDV8R6o4JpyLbN058xc_5M6EQa6FxqlAC_imrEj97lMxN0ZrPdT0e3PaRBRaPMXsCVSOQcIpMEVhna3tRoViIKtPT3IhgkxDOEbx4wbGOYCMM0hpdyHoV3g15mV70pDXP2R6oCGPy5A9x-cpOn0iUAAPNCe1WpWv4FMoev9rWAt8TDLuxCpzMd0-wBBNZ-WWcHEa1Qwo598We_T15xHXSsIBsVe_vkmeFGp7yg9t2kJqokgDXOB7rr1k2w-ATjB2x9Lt7w93wjGcTgX57RKL8sV2jjb0XbJ9vB5eY3yoJw5u21nFBBmLoA2JkllZDFCZ7COWHaiZfqtxa-3d56BmP_LCZGc9_aY44MRObjVo38k9oXuENU8nG0NuaYMDM320lhehG6aq8ozRmh3e1zvkDpsnmm1LvQzahVxIkb_2-dvCBrrXFdsJhzc2xYHhU270oiwnMYhTgkJZ4VZGy_odgzHxuC1QErkGhB_MMoxMAKBtsNEPIVJUNtJZG0MBlEUGVCVdFM9I5f47yhlh6tSggG0WOOwImJiVj_SQhrGyd7BOySbfQYEFE_3TXKXRrytAZj_GGXTrAQS8AOqfy4eGv-kMuCc10K-8_ewK31DL8pe_RYpGOPtWTmQ-sHx0C8c_hBqEBFoM-GjRnmzo-9g1FZ-jo78Mqt47fWU2yszIM"
-	wrongToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+	okToken     = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTA4MDE0MTUsImlzcyI6IjE5Mi4xNjguOTkuMTAwIiwiYXVkIjpbImNvbXBhbnkiXX0.tBUUGFY7JXHpjiOUkaW2QJ4r5i0IgxorasR7P6aQ6m7hWoMnOesBGMAHs48bdqFi2WQIFQ8x1E7WV-wPu31t05cE1YvhQvXd1L5cQbrtu6hsgfr9DU9FMDArHmJ2h2_inHpRI7xSKETU_uOD3hn8kSuzHetVlRJbIsM9M-7MTg3gAqSVbx6LDYIJVKA0Crox-bG1DMoeGdUBQ8RUprQ7K-1uEugtiYY8VjmDLQywx_8p07YZnxbkeii2IdEY9242hsBdbc_K3dHjB3yswXTwdBkFpAh0TdS9GfWr83OgSSRxNygSZJfWlJ3RLFL8lYbOcj_BAeTf6qKPVCiVukrW7TnPTKG9gS9ESHq2xOZg1VRh4FDUZsLkeiO8lWcL864J-xXKR93CodocGV5FOgsp33GKibXGQJsXxdTEqUHBOHT0hQJ4LOZXVxBkIcFjqG-vvEPCPdpCS-Axr1gb9llBtmOdvzv8CS1hQgBI2c6Ljqp6RwY9_vVsRRs7fqYEqRTR_HOuYTZHraj7_T-pm0Bk0SNShExXF0IyLdMqk6b4qeI_xRGbn7iL4B_J0of5evIOPtAoFqQOYAWes_tEWVZuo4Ul5LDWu2fwrTsEEhd7geGEWustVZ7QRMIAo1zjhqkqE1KqClTkGFJgDJfC5SXxXBt5jf9bsz0vEHVvWWeyg4Q"
+	wrongToken  = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 )
 
 func getCompanies(auth string) {
@@ -49,7 +50,7 @@ func main() {
 	if argNum < 2 {
 		fmt.Println("Usage: required args [RS256 | HS256]")
 		return
-	} 
+	}
 
 	for i := 0; i < 2000; i++ {
 		getCompanies(os.Args[1])
