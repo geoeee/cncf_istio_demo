@@ -1,3 +1,14 @@
+# handler configuration for authz adapter
+---
+apiVersion: "config.istio.io/v1alpha2"
+kind: authz
+metadata:
+ name: handler
+ namespace: istio-system
+spec:
+ service_url: "http://authz.demo/authz/v1/authorize"
+ cache_duration: "1s"
+---
 # instance configuration for authorization template
 # compose the inputs for adapter using istio attributes
 apiVersion: "config.istio.io/v1alpha2"
@@ -19,16 +30,6 @@ spec:
     path: request.path | ""
     properties:
       token: request.headers["authorization"] | ""
----
-# handler configuration for authz adapter
-apiVersion: "config.istio.io/v1alpha2"
-kind: authz
-metadata:
- name: handler
- namespace: istio-system
-spec:
- service_url: "http://authz.demo/authz/v1/authorize"
- cache_duration: "1s"
 ---
 # rule to dispatch to the handler
 apiVersion: "config.istio.io/v1alpha2"
