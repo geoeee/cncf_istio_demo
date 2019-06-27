@@ -1,9 +1,9 @@
 inspect:
-	kubectl get virtualservice
-	kubectl get gateway
-	kubectl get destinationrule
-	kubectl get svc
-	kubectl get pods
+	kubectl get virtualservice -n demo
+	kubectl get gateway -n demo
+	kubectl get destinationrule -n demo
+	kubectl get svc -n demo
+	kubectl get pods -n demo
 
 insole/apply:
 	@echo "applying insole demo"
